@@ -26,6 +26,7 @@ def create_employee(db: Session, employee: EmployeeCreate):
         db.add(db_employee)
         db.commit()
         db.refresh(db_employee)
+        return db_employee
     except IntegrityError:
         db.rollback()
         raise ValueError("Fehler beim speichern")    
@@ -50,7 +51,7 @@ def update_employee(db: Session, employee_id: int, employee_update: EmployeeUpda
         if existing:
             raise ValueError("Email bereits vergeben")
     update_data = employee_update.model_dump(exclude_unset=True)
-    for key, value in update_data.item():
+    for key, value in update_data.items():
         setattr(db_employee, key, value)
 
     db_employee.update_at = datetime.utcnow()

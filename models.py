@@ -20,10 +20,10 @@ class EmployeeUpdate(BaseModel):
     salary: Optional[float] = Field(None, ge=0)
 
 
-    class Employee(EmployeeBase):
-        id: int
-        created_at: datetime
-        update_at: Optional[datetime] = None
+class Employee(EmployeeBase):
+    id: int
+    created_at: datetime
+    update_at: Optional[datetime] = None
 
-        class Config:
-            from_attributes = True
+    class Config:
+        from_attributes = True
